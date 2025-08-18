@@ -1,6 +1,6 @@
 package com.ohhoonim.demo_auditing.component.dataBy;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 import com.ohhoonim.demo_auditing.component.id.Id;
 
@@ -8,15 +8,15 @@ public final class Created implements DataBy {
 
     private Id id;
     private String creator;
-    private LocalDateTime created;
+    private Instant created;
 
     public Created() {
-        this.created = LocalDateTime.now();
+        this.created = Instant.now();
     }
 
     public Created(String creator) {
         this.creator = creator;
-        this.created = LocalDateTime.now();
+        this.created = Instant.now();
     }
 
     public String getCreator() {
@@ -27,11 +27,11 @@ public final class Created implements DataBy {
         this.creator = creator;
     }
 
-    public LocalDateTime getCreated() {
+    public Instant getCreated() {
         return created;
     }
 
-    public void setCreated(LocalDateTime created) {
+    public void setCreated(Instant created) {
         this.created = created;
     }
 

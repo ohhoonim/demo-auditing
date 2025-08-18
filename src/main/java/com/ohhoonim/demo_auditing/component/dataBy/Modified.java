@@ -1,21 +1,21 @@
 package com.ohhoonim.demo_auditing.component.dataBy;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 import com.ohhoonim.demo_auditing.component.id.Id;
 
 public final class Modified implements DataBy {
     private Id id;
     private String modifier;
-    private LocalDateTime modified;
+    private Instant modified;
 
     public Modified() {
-        this.modified = LocalDateTime.now();
+        this.modified = Instant.now();
     }
 
     public Modified(String modifier) {
         this.modifier = modifier;
-        this.modified = LocalDateTime.now();
+        this.modified = Instant.now();
     }
 
     public String getModifier() {
@@ -26,11 +26,11 @@ public final class Modified implements DataBy {
         this.modifier = modifier;
     }
 
-    public LocalDateTime getModified() {
+    public Instant getModified() {
         return modified;
     }
 
-    public void setModified(LocalDateTime modified) {
+    public void setModified(Instant modified) {
         this.modified = modified;
     }
 
@@ -41,5 +41,4 @@ public final class Modified implements DataBy {
     public void setId(Id id) {
         this.id = id;
     }
-
 }
