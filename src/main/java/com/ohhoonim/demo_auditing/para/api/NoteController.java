@@ -45,8 +45,8 @@ public class NoteController {
     }
 
     @GetMapping("/note/{noteId}")
-    public Note getNote(@PathVariable("noteId") Id noteId) {
-        return noteService.getNote(noteId)
+    public Note getNote(@PathVariable("noteId") String noteId) {
+        return noteService.getNote(Id.valueOf(noteId))
                 .orElseThrow(() -> new RuntimeException("note가 존재하지 않습니다"));
     }
 
@@ -63,45 +63,45 @@ public class NoteController {
     }
 
     @PostMapping("/note/{noteId}/removeNote")
-    public Response removeNote(@PathVariable Id noteId) {
-        noteService.removeNote(noteId);
+    public Response removeNote(@PathVariable String noteId) {
+        noteService.removeNote(Id.valueOf(noteId));
         return new Success(ResponseCode.SUCCESS, noteId);
     }
 
     @GetMapping("/note/{noteId}/tags")
-    public Set<Tag> tags(@PathVariable("noteId") Id noteId) {
-        return noteService.tags(noteId);
+    public Set<Tag> tags(@PathVariable("noteId") String noteId) {
+        return noteService.tags(Id.valueOf(noteId));
     }
 
     @PostMapping("/note/{noteId}/registTag")
-    public Set<Tag> registTag(@PathVariable("noteId") Id noteId,
+    public Set<Tag> registTag(@PathVariable("noteId") String noteId,
             @RequestBody Tag tag) {
-        return noteService.registTag(noteId, tag);
+        return noteService.registTag(Id.valueOf(noteId), tag);
     }
 
     @PostMapping("/note/{noteId}/removeTag")
-    public Set<Tag> removeTag(@PathVariable("noteId") Id noteId,
+    public Set<Tag> removeTag(@PathVariable("noteId") String noteId,
             @RequestBody Tag tag) {
-        return noteService.removeTag(noteId, tag);
+        return noteService.removeTag(Id.valueOf(noteId), tag);
     }
 
     @GetMapping("/note/{noteId}/paras")
-    public Set<Para> paras(@PathVariable("noteId") Id noteId) {
-        return noteService.paras(noteId);
+    public Set<Para> paras(@PathVariable("noteId") String noteId) {
+        return noteService.paras(Id.valueOf(noteId));
     }
 
     @PostMapping("/note/{noteId}/registPara")
-    public Response registPara(@PathVariable("noteId") Id noteId,
+    public Response registPara(@PathVariable("noteId") String noteId,
             @RequestBody ParaReq para) {
-        noteService.registPara(noteId, 
+        noteService.registPara(Id.valueOf(noteId), 
                 Para.getParaInstance(Id.valueOf(para.getNoteId()), para.getCategory()));
         return new Success(ResponseCode.SUCCESS, noteId);
     }
 
     @PostMapping("/note/{noteId}/removePara")
-    public Response removePara(@PathVariable("noteId") Id noteId,
+    public Response removePara(@PathVariable("noteId") String noteId,
             @RequestBody ParaReq para) {
-        noteService.removePara(noteId, 
+        noteService.removePara(Id.valueOf(noteId), 
             Para.getParaInstance(Id.valueOf(para.getNoteId()), para.getCategory()));
         return new Success(ResponseCode.SUCCESS, noteId);
     }

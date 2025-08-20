@@ -3,6 +3,7 @@ package com.ohhoonim.demo_auditing.component.id;
 import java.io.Serializable;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.github.f4b6a3.ulid.Ulid;
 
 public class Id implements Serializable {
@@ -29,6 +30,7 @@ public class Id implements Serializable {
         return new Id(ulid);
     }
 
+    @JsonValue
     public String getId() {
         return this.toString();
     }

@@ -1,7 +1,5 @@
 package com.ohhoonim.demo_auditing.para;
 
-import com.ohhoonim.demo_auditing.component.id.Id;
-
 public class ParaNoteReq {
 
     private String category;

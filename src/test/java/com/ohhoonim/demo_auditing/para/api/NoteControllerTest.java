@@ -96,7 +96,7 @@ public class NoteControllerTest {
                 .apply(print())
                 .hasStatusOk()
                 .bodyJson()
-                .extractingPath("$.data.noteId.id")
+                .extractingPath("$.data.noteId")
                 .isEqualTo(noteId.toString());
     }
 
@@ -116,7 +116,7 @@ public class NoteControllerTest {
                 .apply(print())
                 .hasStatusOk()
                 .bodyJson()
-                .extractingPath("$.data.noteId.id")
+                .extractingPath("$.data.noteId")
                 .isEqualTo(noteId.toString());
 
     }

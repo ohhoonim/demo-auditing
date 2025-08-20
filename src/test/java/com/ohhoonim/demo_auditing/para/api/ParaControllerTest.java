@@ -21,7 +21,6 @@ import com.ohhoonim.demo_auditing.component.id.Id;
 import com.ohhoonim.demo_auditing.para.Page;
 import com.ohhoonim.demo_auditing.para.Para;
 import com.ohhoonim.demo_auditing.para.Para.ParaEnum;
-import com.ohhoonim.demo_auditing.para.Para.Project;
 import com.ohhoonim.demo_auditing.para.Para.Shelf.Area;
 import com.ohhoonim.demo_auditing.para.ParaNoteReq;
 import com.ohhoonim.demo_auditing.para.ParaReq;
@@ -124,7 +123,7 @@ public class ParaControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .assertThat().apply(print())
                 .hasStatusOk().bodyJson()
-                .extractingPath("$.data.paraId.id")
+                .extractingPath("$.data.paraId")
                 .isEqualTo(paraId.toString());
     }
 
