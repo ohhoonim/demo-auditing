@@ -128,7 +128,7 @@ public class NoteRepository implements NotePort, TagPort {
     @Override
     public void addTagInNote(Id noteId, Tag tag) {
         var tagId = tag.getTagId();
-        if (tag.getTagId() == null) {
+        if (tagId == null) {
             tagId = this.addTag(tag).getTagId();
         }
         var sql = """
@@ -137,21 +137,23 @@ public class NoteRepository implements NotePort, TagPort {
                 """;
         jdbcClient.sql(sql)
                 .param("noteId", noteId.toString())
-                .param("tagId", tagId)
+                .param("tagId", tagId.toString())
                 .update();
     }
 
-    @SuppressWarnings("null")
     public Tag addTag(Tag tag) {
+        var tagId = tag.getTagId() == null ? new Id() : tag.getTagId();
+
         var sql = """
-                insert into para_tag (tag) values(:tag)
+                insert into para_tag (tag_id, tag) values(:tagId, :tag)
                 """;
-        KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcClient.sql(sql).param("tag", tag.getTag())
-                .update(keyHolder);
+                .param("tagId", tagId.toString())
+                .param("tag", tag.getTag())
+                .update();
 
         return jdbcClient.sql("select tag_id, tag from para_tag where tag_id = :tagId")
-                .param("tagId", keyHolder.getKeys().get("tag_id"))
+                .param("tagId", tagId.toString())
                 .query(Tag.class).single();
     }
 

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.github.f4b6a3.ulid.Ulid;
 
 public class Id implements Serializable {
@@ -28,6 +29,14 @@ public class Id implements Serializable {
 
     public static Id valueOf(String ulid) {
         return new Id(ulid);
+    }
+
+    /*
+     * util성으로 히스토리 이벤트 발행시 사용할 메소드 만들어둚
+     */
+    public static String entityType(Class<?> clazz) {
+        String camel = clazz.getSimpleName();
+        return new PropertyNamingStrategies.SnakeCaseStrategy().translate(camel);
     }
 
     @JsonValue

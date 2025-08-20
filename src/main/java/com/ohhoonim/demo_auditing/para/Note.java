@@ -3,6 +3,7 @@ package com.ohhoonim.demo_auditing.para;
 import java.util.List;
 import java.util.Set;
 
+import com.ohhoonim.demo_auditing.component.dataBy.DataBy;
 import com.ohhoonim.demo_auditing.component.id.Id;
 
 public class Note {
@@ -12,6 +13,9 @@ public class Note {
     private String content;
     private Set<Tag> tags;
     private List<Para> paras;
+
+    private DataBy created;
+    private DataBy modified; 
 
     public Note() {}
 
@@ -78,4 +82,22 @@ public class Note {
     public void setParas(List<Para> paras) {
         this.paras = paras;
     }
+
+    public DataBy getCreated() {
+        return created;
+    }
+
+    public void setCreated(DataBy created) {
+        this.created = created;
+    }
+
+    public DataBy getModified() {
+        return modified;
+    }
+
+    public void setModified(DataBy modified) {
+        this.modified = modified;
+    }
+
+    
 }

@@ -1,20 +1,22 @@
 package com.ohhoonim.demo_auditing.para;
 
+import com.ohhoonim.demo_auditing.component.id.Id;
+
 public class Tag {
-    private Long tagId;
+    private Id tagId;
     private String tag;
 
     public Tag() {
     }
 
-    public Tag(Long tagId, String tag) {
+    public Tag(Id tagId, String tag) {
         this.tagId = tagId;
         this.tag = tag;
     }
-    public Long getTagId() {
+    public Id getTagId() {
         return tagId;
     }
-    public void setTagId(Long tagId) {
+    public void setTagId(Id tagId) {
         this.tagId = tagId;
     }
     public String getTag() {

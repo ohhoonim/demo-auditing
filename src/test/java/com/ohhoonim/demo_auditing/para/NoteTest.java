@@ -9,7 +9,6 @@ import static org.mockito.Mockito.when;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.UUID;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -86,8 +85,8 @@ public class NoteTest {
     public void addTagTest() {
         // search tag --> tagService
         Set<Tag> searchedTags = Set.of(
-                new Tag(1L, "java"),
-                new Tag(2L, "javascript"));
+                new Tag(new Id(), "java"),
+                new Tag(new Id(), "javascript"));
         when(tagPort.findTags(any(), any())).thenReturn(searchedTags);
 
         Set<Tag> tagList = tagService.findTagsLimit20PerPage("java", null);
@@ -96,11 +95,11 @@ public class NoteTest {
         verify(tagPort, times(1)).findTags(any(), any());
 
         // add tag int note
-        var searchedTag = new Tag(1L, "java");
+        var searchedTag = new Tag(new Id(), "java");
 
         var noteId = new Id();
 
-        when(tagPort.tagsInNote(any())).thenReturn(Set.of(new Tag(1L, "java")));
+        when(tagPort.tagsInNote(any())).thenReturn(Set.of(new Tag(new Id(), "java")));
 
         Set<Tag> tags = noteService.registTag(noteId, searchedTag);
 

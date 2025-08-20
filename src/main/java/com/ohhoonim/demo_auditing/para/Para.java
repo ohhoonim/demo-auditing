@@ -3,6 +3,7 @@ package com.ohhoonim.demo_auditing.para;
 import java.lang.reflect.Constructor;
 import java.time.LocalDate;
 
+import com.ohhoonim.demo_auditing.component.dataBy.DataBy;
 import com.ohhoonim.demo_auditing.component.id.Id;
 import com.ohhoonim.demo_auditing.para.Para.Shelf.Archive;
 import com.ohhoonim.demo_auditing.para.Para.Shelf.Area;
@@ -10,12 +11,11 @@ import com.ohhoonim.demo_auditing.para.Para.Shelf.Resource;
 
 public sealed interface Para {
 	public Id getParaId();
-
 	public String getTitle();
-
 	public String getContent();
-
 	public String getCategory();
+	public DataBy getCreated();
+	public DataBy getModified();
 
 	/**
 	 * paraId만으로 Para 객체를 생성할 때 사용 
@@ -81,6 +81,8 @@ public sealed interface Para {
 			private LocalDate endDate;
 			private Status status;
 			private String category;
+			private DataBy created;
+			private DataBy modified; 
 
 		public Project() {
 			category = ParaEnum.Project.toString();
@@ -170,6 +172,23 @@ public sealed interface Para {
 			this.category = category;
 		}
 
+		public DataBy getCreated() {
+			return created;
+		}
+
+		public void setCreated(DataBy created) {
+			this.created = created;
+		}
+
+		public DataBy getModified() {
+			return modified;
+		}
+
+		public void setModified(DataBy modified) {
+			this.modified = modified;
+		}
+
+		
 		
 	}
 
@@ -190,6 +209,8 @@ public sealed interface Para {
 				private String title;
 				private String content;
 				private String category; 
+				private DataBy created;
+				private DataBy modified; 
 			public Area () {
 				category = ParaEnum.Area.toString();
 			}
@@ -241,6 +262,22 @@ public sealed interface Para {
 				this.category = category;
 			}
 
+			public DataBy getCreated() {
+				return created;
+			}
+
+			public void setCreated(DataBy created) {
+				this.created = created;
+			}
+
+			public DataBy getModified() {
+				return modified;
+			}
+
+			public void setModified(DataBy modified) {
+				this.modified = modified;
+			}
+			
 			
 		}
 
@@ -249,6 +286,8 @@ public sealed interface Para {
 			private String title;
 			private String content;
 			private String category; 
+			private DataBy created;
+			private DataBy modified; 
 
 			public Resource(){
 				category = ParaEnum.Resource.toString();
@@ -301,6 +340,22 @@ public sealed interface Para {
 				this.category = category;
 			}
 
+			public DataBy getCreated() {
+				return created;
+			}
+
+			public void setCreated(DataBy created) {
+				this.created = created;
+			}
+
+			public DataBy getModified() {
+				return modified;
+			}
+
+			public void setModified(DataBy modified) {
+				this.modified = modified;
+			}
+			
 			
 		}
 
@@ -309,6 +364,8 @@ public sealed interface Para {
 			private String title;
 			private String content;
 			private String category; 
+			private DataBy created;
+			private DataBy modified; 
 
 			public Archive (){
 				this.category = ParaEnum.Archive.toString();
@@ -360,6 +417,23 @@ public sealed interface Para {
 			public void setCategory(String category) {
 				this.category = category;
 			}
+
+			public DataBy getCreated() {
+				return created;
+			}
+
+			public void setCreated(DataBy created) {
+				this.created = created;
+			}
+
+			public DataBy getModified() {
+				return modified;
+			}
+
+			public void setModified(DataBy modified) {
+				this.modified = modified;
+			}
+			
 		}
 	}
 }

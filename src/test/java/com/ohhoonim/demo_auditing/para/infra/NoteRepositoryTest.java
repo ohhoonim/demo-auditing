@@ -68,17 +68,18 @@ public class NoteRepositoryTest {
 
     @Test
     public void tagTest() {
-        var tagJava = new Tag(null, "java");
+        var tagJava = new Tag(new Id(), "java");
         noteRepository.addTag(tagJava);
 
-        var tagJavascript = new Tag(null, "javascript");
+        var tagJavascript = new Tag(new Id(), "javascript");
         noteRepository.addTag(tagJavascript);
 
-        var tagSpring = new Tag(null, "spring");
+        var tag3 = new Id();
+        var tagSpring = new Tag(tag3, "spring");
         var addedTagSpring = noteRepository.addTag(tagSpring);
 
         assertThat(addedTagSpring.getTag()).isEqualTo("spring");
-        assertThat(addedTagSpring.getTagId()).isEqualTo(3);
+        assertThat(addedTagSpring.getTagId()).isEqualTo(tag3);
 
     }
 
@@ -86,7 +87,7 @@ public class NoteRepositoryTest {
     public void addTagInNoteTest() {
         // 노트가 존재하지 않거나 등록된 태그가 아니면 에러
         assertThrows(Exception.class, () -> {
-            noteRepository.addTagInNote(new Id(), new Tag(3l, "spring"));
+            noteRepository.addTagInNote(new Id(), new Tag(new Id(), "spring"));
         });
     }
 

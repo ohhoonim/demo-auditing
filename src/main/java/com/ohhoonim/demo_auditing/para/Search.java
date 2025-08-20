@@ -23,6 +23,4 @@ public class Search<T> {
         this.page = page;
     }
 
-    
-
 }
