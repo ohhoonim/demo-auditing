@@ -19,6 +19,10 @@ public class JsonBTypeHandler<T> extends BaseTypeHandler<T> {
     private static final ObjectMapper objectMapper = new ObjectMapper();
     private Class<T> type;
 
+    public JsonBTypeHandler() {
+
+    }
+
     public JsonBTypeHandler(Class<T> type) {
         if (type == null) {
             throw new IllegalArgumentException("Type argument cannot be null");
