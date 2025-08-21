@@ -1,11 +1,8 @@
-package com.ohhoonim.demo_auditing.component.dataBy;
+package com.ohhoonim.demo_auditing.component.auditing.dataBy;
 
 import java.time.Instant;
 
-import com.ohhoonim.demo_auditing.component.id.Id;
-
 public final class Modified implements DataBy {
-    private Id id;
     private String modifier;
     private Instant modified;
 
@@ -32,13 +29,5 @@ public final class Modified implements DataBy {
 
     public void setModified(Instant modified) {
         this.modified = modified;
-    }
-
-    public Id getId() {
-        return this.id;
-    }
-
-    public void setId(Id id) {
-        this.id = id;
     }
 }

@@ -11,13 +11,13 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 
-import com.ohhoonim.demo_auditing.component.id.Id;
+import com.ohhoonim.demo_auditing.component.auditing.dataBy.Id;
+import com.ohhoonim.demo_auditing.component.container.Page;
 import com.ohhoonim.demo_auditing.para.Note;
-import com.ohhoonim.demo_auditing.para.Page;
 import com.ohhoonim.demo_auditing.para.Para;
 import com.ohhoonim.demo_auditing.para.Para.Project;
-import com.ohhoonim.demo_auditing.para.Status;
-import com.ohhoonim.demo_auditing.para.port.ProjectPort;
+import com.ohhoonim.demo_auditing.para.activity.port.ProjectPort;
+import com.ohhoonim.demo_auditing.para.ProjectStatus;
 
 @Repository
 public class ProjectRepository implements ProjectPort {
@@ -71,7 +71,7 @@ public class ProjectRepository implements ProjectPort {
                 rs.getString("content"),
                 rs.getTimestamp("start_date") == null ? null : rs.getTimestamp("start_date").toLocalDateTime().toLocalDate(),
                 rs.getTimestamp("end_date") == null ? null : rs.getTimestamp("end_date").toLocalDateTime().toLocalDate(),
-                rs.getString("status") == null ? null : Status.valueOf(rs.getString("status")));
+                rs.getString("status") == null ? null : ProjectStatus.valueOf(rs.getString("status")));
     };
 
     @Override
@@ -196,6 +196,6 @@ public class ProjectRepository implements ProjectPort {
                 rs.getString("content"),
                 rs.getTimestamp("start_date") == null ? null : rs.getTimestamp("start_date").toLocalDateTime().toLocalDate(),
                 rs.getTimestamp("end_date") == null ? null : rs.getTimestamp("end_date").toLocalDateTime().toLocalDate(),
-                rs.getString("status") == null ? null : Status.valueOf(rs.getString("status")));
+                rs.getString("status") == null ? null : ProjectStatus.valueOf(rs.getString("status")));
     };
 }

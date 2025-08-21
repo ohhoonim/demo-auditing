@@ -17,14 +17,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.ohhoonim.demo_auditing.component.id.Id;
+import com.ohhoonim.demo_auditing.component.auditing.dataBy.Id;
 import com.ohhoonim.demo_auditing.para.Para.Project;
 import com.ohhoonim.demo_auditing.para.Para.Shelf.Archive;
 import com.ohhoonim.demo_auditing.para.Para.Shelf.Area;
 import com.ohhoonim.demo_auditing.para.Para.Shelf.Resource;
-import com.ohhoonim.demo_auditing.para.port.ProjectPort;
-import com.ohhoonim.demo_auditing.para.port.ShelfPort;
-import com.ohhoonim.demo_auditing.para.service.ParaService;
+import com.ohhoonim.demo_auditing.para.activity.port.ProjectPort;
+import com.ohhoonim.demo_auditing.para.activity.port.ShelfPort;
+import com.ohhoonim.demo_auditing.para.activity.service.ParaService;
 
 @ExtendWith(MockitoExtension.class)
 public class ParaTest {
@@ -48,7 +48,7 @@ public class ParaTest {
                 "no coontents",
                 LocalDate.now(),
                 LocalDate.now().plusMonths(6),
-                Status.Backlog);
+                ProjectStatus.Backlog);
 
         when(projectPort.getProject(any())).thenReturn(Optional.of(project));
 
@@ -58,12 +58,12 @@ public class ParaTest {
                 "no coontents",
                 LocalDate.now(),
                 LocalDate.now().plusMonths(6),
-                Status.Backlog);
+                ProjectStatus.Backlog);
         Optional<Para> resultPara = paraService.addPara(newProject);
 
         assertThat(resultPara.get().getParaId()).isEqualTo(projectId);
         assertThat(resultPara.get()).isInstanceOf(Project.class);
-        assertThat(((Project) resultPara.get()).getStatus()).isEqualTo(Status.Backlog);
+        assertThat(((Project) resultPara.get()).getStatus()).isEqualTo(ProjectStatus.Backlog);
         verify(projectPort, times(1)).addProject(any(), any());
 
         // note 추가 

@@ -9,7 +9,7 @@ import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedJdbcTypes;
 
-import com.ohhoonim.demo_auditing.component.id.Id;
+import com.ohhoonim.demo_auditing.component.auditing.dataBy.Id;
 
 @MappedJdbcTypes(JdbcType.VARCHAR)
 public class IdTypehandler extends BaseTypeHandler<Id> {

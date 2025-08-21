@@ -10,16 +10,14 @@ import java.util.function.Function;
 
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.JdbcClient;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import com.ohhoonim.demo_auditing.component.id.Id;
+import com.ohhoonim.demo_auditing.component.auditing.dataBy.Id;
+import com.ohhoonim.demo_auditing.component.container.Page;
 import com.ohhoonim.demo_auditing.para.Note;
-import com.ohhoonim.demo_auditing.para.Page;
 import com.ohhoonim.demo_auditing.para.Tag;
-import com.ohhoonim.demo_auditing.para.port.NotePort;
-import com.ohhoonim.demo_auditing.para.port.TagPort;
+import com.ohhoonim.demo_auditing.para.activity.port.NotePort;
+import com.ohhoonim.demo_auditing.para.activity.port.TagPort;
 
 @Repository
 public class NoteRepository implements NotePort, TagPort {

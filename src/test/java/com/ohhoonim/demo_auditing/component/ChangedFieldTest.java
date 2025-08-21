@@ -15,6 +15,9 @@ import org.springframework.beans.BeanUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.JsonPath;
+import com.ohhoonim.demo_auditing.component.auditing.change.ChangedField;
+import com.ohhoonim.demo_auditing.component.auditing.dataBy.Id;
+import com.ohhoonim.demo_auditing.component.container.Page;
 
 public class ChangedFieldTest {
 
@@ -89,6 +92,26 @@ public class ChangedFieldTest {
             throw new RuntimeException("Failed to serialize changed fields to JSON", e);
         }
     };
+
+    @Test
+    public void changedFieldTest() {
+        var oldId = new Id();
+        var newId = new Id();
+
+        var page1 = new Page(1000, 20, oldId);
+        var page2 = new Page(1000, 20, newId);
+
+        ChangedField changedField = new ChangedField(objectMapper);
+        var resultJson = changedField.apply(page1, page2);        
+
+        log.info("{}", resultJson);
+
+        String newValue= JsonPath.read(resultJson,
+                "$.changed_fields.lastSeenKey.new_value");
+
+        assertThat(Id.valueOf(newValue)).isEqualTo(newId);
+    }
+
 }
 // record는 동작안함
 // record User(String name, int age) {}

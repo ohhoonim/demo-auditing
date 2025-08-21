@@ -1,4 +1,4 @@
-package com.ohhoonim.demo_auditing.component.response;
+package com.ohhoonim.demo_auditing.component.container.handler;
 
 import java.lang.reflect.ParameterizedType;
 
@@ -16,7 +16,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ohhoonim.demo_auditing.component.response.Response.Fail;
+import com.ohhoonim.demo_auditing.component.container.Response;
+import com.ohhoonim.demo_auditing.component.container.Response.Fail;
+import com.ohhoonim.demo_auditing.component.container.ResponseCode;
 
 import jakarta.servlet.http.HttpServletRequest;
 

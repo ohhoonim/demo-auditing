@@ -1,12 +1,9 @@
-package com.ohhoonim.demo_auditing.component.dataBy;
+package com.ohhoonim.demo_auditing.component.auditing.dataBy;
 
 import java.time.Instant;
 
-import com.ohhoonim.demo_auditing.component.id.Id;
-
 public final class Created implements DataBy {
 
-    private Id id;
     private String creator;
     private Instant created;
 
@@ -33,13 +30,5 @@ public final class Created implements DataBy {
 
     public void setCreated(Instant created) {
         this.created = created;
-    }
-
-    public Id getId() {
-        return this.id;
-    }
-
-    public void setId(Id id) {
-        this.id = id;
     }
 }

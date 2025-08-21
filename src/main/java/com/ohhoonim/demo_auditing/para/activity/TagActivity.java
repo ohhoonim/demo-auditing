@@ -2,7 +2,7 @@ package com.ohhoonim.demo_auditing.para.activity;
 
 import java.util.Set;
 
-import com.ohhoonim.demo_auditing.para.Page;
+import com.ohhoonim.demo_auditing.component.container.Page;
 import com.ohhoonim.demo_auditing.para.Tag;
 
 public interface TagActivity {

@@ -9,17 +9,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ohhoonim.demo_auditing.component.id.Id;
-import com.ohhoonim.demo_auditing.component.response.Response;
-import com.ohhoonim.demo_auditing.component.response.Response.Success;
-import com.ohhoonim.demo_auditing.component.response.ResponseCode;
+import com.ohhoonim.demo_auditing.component.auditing.dataBy.Id;
+import com.ohhoonim.demo_auditing.component.container.Page;
+import com.ohhoonim.demo_auditing.component.container.Response;
+import com.ohhoonim.demo_auditing.component.container.ResponseCode;
+import com.ohhoonim.demo_auditing.component.container.Response.Success;
 import com.ohhoonim.demo_auditing.para.Note;
-import com.ohhoonim.demo_auditing.para.Page;
 import com.ohhoonim.demo_auditing.para.Para;
-import com.ohhoonim.demo_auditing.para.ParaReq;
 import com.ohhoonim.demo_auditing.para.Tag;
-import com.ohhoonim.demo_auditing.para.service.NoteService;
-import com.ohhoonim.demo_auditing.para.service.TagService;
+import com.ohhoonim.demo_auditing.para.activity.service.NoteService;
+import com.ohhoonim.demo_auditing.para.activity.service.TagService;
 
 @RestController
 public class NoteController {

@@ -1,8 +1,9 @@
 package com.ohhoonim.demo_auditing.para;
 
-import com.ohhoonim.demo_auditing.component.id.Id;
+import com.ohhoonim.demo_auditing.component.auditing.dataBy.Entity;
+import com.ohhoonim.demo_auditing.component.auditing.dataBy.Id;
 
-public class Tag {
+public class Tag implements Entity{
     private Id tagId;
     private String tag;
 
@@ -24,6 +25,11 @@ public class Tag {
     }
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    @Override
+    public Id getId() {
+        return tagId;
     }
 
     

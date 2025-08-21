@@ -1,4 +1,4 @@
-package com.ohhoonim.demo_auditing.para;
+package com.ohhoonim.demo_auditing.para.api;
 
 public class ParaNoteReq {
 

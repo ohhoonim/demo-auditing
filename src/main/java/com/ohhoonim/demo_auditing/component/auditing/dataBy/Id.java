@@ -1,4 +1,4 @@
-package com.ohhoonim.demo_auditing.component.id;
+package com.ohhoonim.demo_auditing.component.auditing.dataBy;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.github.f4b6a3.ulid.Ulid;
 
-public class Id implements Serializable {
+public final class Id implements DataBy, Serializable {
 
     private UUID id;
 
