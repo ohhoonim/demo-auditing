@@ -1,19 +1,19 @@
-package com.ohhoonim.demo_auditing.para.service;
+package com.ohhoonim.demo_auditing.para.activity.service;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.ohhoonim.demo_auditing.component.id.Id;
+import com.ohhoonim.demo_auditing.component.auditing.dataBy.Id;
+import com.ohhoonim.demo_auditing.component.container.Page;
 import com.ohhoonim.demo_auditing.para.Note;
-import com.ohhoonim.demo_auditing.para.Page;
 import com.ohhoonim.demo_auditing.para.Para;
 import com.ohhoonim.demo_auditing.para.Para.Project;
 import com.ohhoonim.demo_auditing.para.Para.Shelf;
 import com.ohhoonim.demo_auditing.para.activity.ParaActivity;
-import com.ohhoonim.demo_auditing.para.port.ProjectPort;
-import com.ohhoonim.demo_auditing.para.port.ShelfPort;
+import com.ohhoonim.demo_auditing.para.activity.port.ProjectPort;
+import com.ohhoonim.demo_auditing.para.activity.port.ShelfPort;
 
 @Service
 public class ParaService implements ParaActivity {

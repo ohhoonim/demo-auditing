@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import com.ohhoonim.demo_auditing.component.id.Id;
+import com.ohhoonim.demo_auditing.component.auditing.dataBy.Id;
+import com.ohhoonim.demo_auditing.component.container.Page;
 import com.ohhoonim.demo_auditing.para.Note;
-import com.ohhoonim.demo_auditing.para.Page;
 import com.ohhoonim.demo_auditing.para.Para;
 import com.ohhoonim.demo_auditing.para.Tag;
 

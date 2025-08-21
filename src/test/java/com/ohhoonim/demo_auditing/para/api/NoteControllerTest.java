@@ -19,14 +19,13 @@ import org.springframework.test.web.servlet.assertj.MockMvcTester;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.JsonPath;
-import com.ohhoonim.demo_auditing.component.id.Id;
+import com.ohhoonim.demo_auditing.component.auditing.dataBy.Id;
+import com.ohhoonim.demo_auditing.component.container.Page;
 import com.ohhoonim.demo_auditing.para.Note;
-import com.ohhoonim.demo_auditing.para.Page;
-import com.ohhoonim.demo_auditing.para.ParaReq;
 import com.ohhoonim.demo_auditing.para.Tag;
+import com.ohhoonim.demo_auditing.para.activity.service.NoteService;
+import com.ohhoonim.demo_auditing.para.activity.service.TagService;
 import com.ohhoonim.demo_auditing.para.api.NoteController.NoteRequest;
-import com.ohhoonim.demo_auditing.para.service.NoteService;
-import com.ohhoonim.demo_auditing.para.service.TagService;
 
 @WebMvcTest(NoteController.class)
 public class NoteControllerTest {

@@ -9,17 +9,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ohhoonim.demo_auditing.component.id.Id;
-import com.ohhoonim.demo_auditing.component.response.Response;
-import com.ohhoonim.demo_auditing.component.response.ResponseCode;
+import com.ohhoonim.demo_auditing.component.auditing.dataBy.Id;
+import com.ohhoonim.demo_auditing.component.container.Response;
+import com.ohhoonim.demo_auditing.component.container.ResponseCode;
+import com.ohhoonim.demo_auditing.component.container.Search;
 import com.ohhoonim.demo_auditing.para.Note;
 import com.ohhoonim.demo_auditing.para.Para;
 import com.ohhoonim.demo_auditing.para.Para.Project;
 import com.ohhoonim.demo_auditing.para.Para.Shelf;
-import com.ohhoonim.demo_auditing.para.ParaNoteReq;
-import com.ohhoonim.demo_auditing.para.ParaReq;
-import com.ohhoonim.demo_auditing.para.Search;
-import com.ohhoonim.demo_auditing.para.service.ParaService;
+import com.ohhoonim.demo_auditing.para.activity.service.ParaService;
 
 @RestController
 public class ParaController {
@@ -106,12 +104,12 @@ public class ParaController {
 
     @PostMapping("/para/searchShelves")
     public List<Shelf> findShelves(@RequestBody Search<ParaReq> search) {
-        return paraService.findShelves(search.getPara().getTitle(), search.getPage());
+        return paraService.findShelves(search.getReq().getTitle(), search.getPage());
     }
 
     @PostMapping("/para/searchProjects")
     public List<Project> findProjects(@RequestBody Search<ParaReq> search) {
-        return paraService.findProjects(search.getPara().getTitle(), search.getPage());
+        return paraService.findProjects(search.getReq().getTitle(), search.getPage());
     }
 
 }

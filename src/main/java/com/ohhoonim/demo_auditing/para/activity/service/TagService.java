@@ -1,13 +1,13 @@
-package com.ohhoonim.demo_auditing.para.service;
+package com.ohhoonim.demo_auditing.para.activity.service;
 
 import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
-import com.ohhoonim.demo_auditing.para.Page;
+import com.ohhoonim.demo_auditing.component.container.Page;
 import com.ohhoonim.demo_auditing.para.Tag;
 import com.ohhoonim.demo_auditing.para.activity.TagActivity;
-import com.ohhoonim.demo_auditing.para.port.TagPort;
+import com.ohhoonim.demo_auditing.para.activity.port.TagPort;
 
 @Service
 public class TagService implements TagActivity {

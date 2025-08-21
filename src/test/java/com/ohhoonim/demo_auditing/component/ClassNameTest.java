@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-import com.ohhoonim.demo_auditing.component.id.Id;
+import com.ohhoonim.demo_auditing.component.auditing.dataBy.Id;
 import com.ohhoonim.demo_auditing.para.Note;
 import com.ohhoonim.demo_auditing.para.api.NoteController;
 

@@ -17,18 +17,19 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.ohhoonim.demo_auditing.component.id.Id;
+import com.ohhoonim.demo_auditing.component.auditing.dataBy.Id;
+import com.ohhoonim.demo_auditing.component.container.Page;
 import com.ohhoonim.demo_auditing.para.Para.Project;
 import com.ohhoonim.demo_auditing.para.Para.Shelf;
 import com.ohhoonim.demo_auditing.para.Para.Shelf.Area;
 import com.ohhoonim.demo_auditing.para.Para.Shelf.Resource;
-import com.ohhoonim.demo_auditing.para.port.NotePort;
-import com.ohhoonim.demo_auditing.para.port.ProjectPort;
-import com.ohhoonim.demo_auditing.para.port.ShelfPort;
-import com.ohhoonim.demo_auditing.para.port.TagPort;
-import com.ohhoonim.demo_auditing.para.service.NoteService;
-import com.ohhoonim.demo_auditing.para.service.ParaService;
-import com.ohhoonim.demo_auditing.para.service.TagService;
+import com.ohhoonim.demo_auditing.para.activity.port.NotePort;
+import com.ohhoonim.demo_auditing.para.activity.port.ProjectPort;
+import com.ohhoonim.demo_auditing.para.activity.port.ShelfPort;
+import com.ohhoonim.demo_auditing.para.activity.port.TagPort;
+import com.ohhoonim.demo_auditing.para.activity.service.NoteService;
+import com.ohhoonim.demo_auditing.para.activity.service.ParaService;
+import com.ohhoonim.demo_auditing.para.activity.service.TagService;
 
 @ExtendWith(MockitoExtension.class)
 public class NoteTest {
@@ -116,7 +117,7 @@ public class NoteTest {
     @DisplayName("노트 para 등록하기 - project 추가")
     public void addProjectTest() {
         // search project --> projecService
-        Page page = new Page(null, 10, 1);
+        Page page = new Page(null, 10, null);
         String searchString = "";
 
         List<Project> results = List.of(

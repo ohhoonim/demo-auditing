@@ -12,15 +12,15 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 
-import com.ohhoonim.demo_auditing.component.id.Id;
+import com.ohhoonim.demo_auditing.component.auditing.dataBy.Id;
+import com.ohhoonim.demo_auditing.component.container.Page;
 import com.ohhoonim.demo_auditing.para.Note;
-import com.ohhoonim.demo_auditing.para.Page;
 import com.ohhoonim.demo_auditing.para.Para;
 import com.ohhoonim.demo_auditing.para.Para.Shelf;
 import com.ohhoonim.demo_auditing.para.Para.Shelf.Archive;
 import com.ohhoonim.demo_auditing.para.Para.Shelf.Area;
 import com.ohhoonim.demo_auditing.para.Para.Shelf.Resource;
-import com.ohhoonim.demo_auditing.para.port.ShelfPort;
+import com.ohhoonim.demo_auditing.para.activity.port.ShelfPort;
 
 @Repository
 public class ShelfRepository implements ShelfPort {
@@ -219,7 +219,6 @@ public class ShelfRepository implements ShelfPort {
                 .query(searchShelfRowMapper).list();
     }
 
-    // TODO query build에 대한 컴포넌트 작성 필요 
     private final Predicate<Object> isNullExpr = value -> {
         return switch (value) {
             case String s when s.length() == 0 -> true;

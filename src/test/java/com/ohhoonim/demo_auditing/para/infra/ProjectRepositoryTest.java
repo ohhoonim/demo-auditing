@@ -18,12 +18,12 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
-import com.ohhoonim.demo_auditing.component.id.Id;
+import com.ohhoonim.demo_auditing.component.auditing.dataBy.Id;
+import com.ohhoonim.demo_auditing.component.container.Page;
 import com.ohhoonim.demo_auditing.para.Note;
-import com.ohhoonim.demo_auditing.para.Page;
 import com.ohhoonim.demo_auditing.para.Para;
 import com.ohhoonim.demo_auditing.para.Para.Project;
-import com.ohhoonim.demo_auditing.para.Status;
+import com.ohhoonim.demo_auditing.para.ProjectStatus;
 
 @Import({ ProjectRepository.class, NoteRepository.class })
 @JdbcTest
@@ -48,7 +48,7 @@ public class ProjectRepositoryTest {
                 "spring course",
                 LocalDate.now(),
                 LocalDate.now().plusDays(30),
-                Status.Backlog);
+                ProjectStatus.Backlog);
 
         projectRepository.addProject(newProject, newParaId);
 
@@ -60,12 +60,12 @@ public class ProjectRepositoryTest {
                 newProject.getContent(),
                 newProject.getStartDate(),
                 newProject.getEndDate(),
-                Status.Ready);
+                ProjectStatus.Ready);
         projectRepository.modifyProject(modifiedProject);
         var modifiedResult = projectRepository.getProject(newParaId);
         assertThat(modifiedResult.isPresent()).isTrue();
         assertThat(modifiedResult.get()).isInstanceOf(Project.class);
-        assertThat(((Project) modifiedResult.get()).getStatus()).isEqualTo(Status.Ready);
+        assertThat(((Project) modifiedResult.get()).getStatus()).isEqualTo(ProjectStatus.Ready);
 
         projectRepository.removeProject(new Project(newParaId));
         var removedProject = projectRepository.getProject(newParaId);

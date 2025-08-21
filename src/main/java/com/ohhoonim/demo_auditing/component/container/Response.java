@@ -1,6 +1,6 @@
-package com.ohhoonim.demo_auditing.component.response;
+package com.ohhoonim.demo_auditing.component.container;
 
-public sealed interface Response  {
+public sealed interface Response extends Container {
 
     public record Success (
         ResponseCode code,

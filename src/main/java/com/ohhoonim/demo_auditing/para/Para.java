@@ -3,8 +3,8 @@ package com.ohhoonim.demo_auditing.para;
 import java.lang.reflect.Constructor;
 import java.time.LocalDate;
 
-import com.ohhoonim.demo_auditing.component.dataBy.DataBy;
-import com.ohhoonim.demo_auditing.component.id.Id;
+import com.ohhoonim.demo_auditing.component.auditing.dataBy.Entity;
+import com.ohhoonim.demo_auditing.component.auditing.dataBy.Id;
 import com.ohhoonim.demo_auditing.para.Para.Shelf.Archive;
 import com.ohhoonim.demo_auditing.para.Para.Shelf.Area;
 import com.ohhoonim.demo_auditing.para.Para.Shelf.Resource;
@@ -14,8 +14,6 @@ public sealed interface Para {
 	public String getTitle();
 	public String getContent();
 	public String getCategory();
-	public DataBy getCreated();
-	public DataBy getModified();
 
 	/**
 	 * paraId만으로 Para 객체를 생성할 때 사용 
@@ -73,16 +71,14 @@ public sealed interface Para {
 		}
 	}
 
-	public final class Project implements Para {
+	public final class Project implements Para, Entity {
 			private Id paraId;
 			private String title;
 			private String content;
 			private LocalDate startDate;
 			private LocalDate endDate;
-			private Status status;
+			private ProjectStatus status;
 			private String category;
-			private DataBy created;
-			private DataBy modified; 
 
 		public Project() {
 			category = ParaEnum.Project.toString();
@@ -101,11 +97,11 @@ public sealed interface Para {
 				String content,
 				LocalDate startDate,
 				LocalDate endDate,
-				Status status) {
+				ProjectStatus status) {
 			this(paraId, title, content, startDate, endDate, status, ParaEnum.Project.toString());
 		}
 
-		public Project(Id paraId, String title, String content, LocalDate startDate, LocalDate endDate, Status status,
+		public Project(Id paraId, String title, String content, LocalDate startDate, LocalDate endDate, ProjectStatus status,
 				String category) {
 			this.paraId = paraId;
 			this.title = title;
@@ -156,11 +152,11 @@ public sealed interface Para {
 			this.endDate = endDate;
 		}
 
-		public Status getStatus() {
+		public ProjectStatus getStatus() {
 			return status;
 		}
 
-		public void setStatus(Status status) {
+		public void setStatus(ProjectStatus status) {
 			this.status = status;
 		}
 
@@ -172,24 +168,10 @@ public sealed interface Para {
 			this.category = category;
 		}
 
-		public DataBy getCreated() {
-			return created;
+		@Override
+		public Id getId() {
+			return paraId;
 		}
-
-		public void setCreated(DataBy created) {
-			this.created = created;
-		}
-
-		public DataBy getModified() {
-			return modified;
-		}
-
-		public void setModified(DataBy modified) {
-			this.modified = modified;
-		}
-
-		
-		
 	}
 
 	public sealed interface Shelf extends Para {
@@ -204,13 +186,11 @@ public sealed interface Para {
 			};
 		}
 
-		public final class Area implements Shelf {
+		public final class Area implements Shelf, Entity {
 				private Id paraId;
 				private String title;
 				private String content;
 				private String category; 
-				private DataBy created;
-				private DataBy modified; 
 			public Area () {
 				category = ParaEnum.Area.toString();
 			}
@@ -262,32 +242,17 @@ public sealed interface Para {
 				this.category = category;
 			}
 
-			public DataBy getCreated() {
-				return created;
+			@Override
+			public Id getId() {
+				return paraId;
 			}
-
-			public void setCreated(DataBy created) {
-				this.created = created;
-			}
-
-			public DataBy getModified() {
-				return modified;
-			}
-
-			public void setModified(DataBy modified) {
-				this.modified = modified;
-			}
-			
-			
 		}
 
-		public final class Resource implements Shelf {
+		public final class Resource implements Shelf, Entity {
 			private Id paraId;
 			private String title;
 			private String content;
 			private String category; 
-			private DataBy created;
-			private DataBy modified; 
 
 			public Resource(){
 				category = ParaEnum.Resource.toString();
@@ -340,32 +305,17 @@ public sealed interface Para {
 				this.category = category;
 			}
 
-			public DataBy getCreated() {
-				return created;
+			@Override
+			public Id getId() {
+				return paraId;
 			}
-
-			public void setCreated(DataBy created) {
-				this.created = created;
-			}
-
-			public DataBy getModified() {
-				return modified;
-			}
-
-			public void setModified(DataBy modified) {
-				this.modified = modified;
-			}
-			
-			
 		}
 
-		public final class Archive implements Shelf {
+		public final class Archive implements Shelf, Entity {
 			private Id paraId;
 			private String title;
 			private String content;
 			private String category; 
-			private DataBy created;
-			private DataBy modified; 
 
 			public Archive (){
 				this.category = ParaEnum.Archive.toString();
@@ -418,22 +368,10 @@ public sealed interface Para {
 				this.category = category;
 			}
 
-			public DataBy getCreated() {
-				return created;
+			@Override
+			public Id getId() {
+				return paraId;
 			}
-
-			public void setCreated(DataBy created) {
-				this.created = created;
-			}
-
-			public DataBy getModified() {
-				return modified;
-			}
-
-			public void setModified(DataBy modified) {
-				this.modified = modified;
-			}
-			
 		}
 	}
 }

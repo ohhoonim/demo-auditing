@@ -17,15 +17,13 @@ import org.springframework.test.web.servlet.assertj.MockMvcTester;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ohhoonim.demo_auditing.component.id.Id;
-import com.ohhoonim.demo_auditing.para.Page;
+import com.ohhoonim.demo_auditing.component.auditing.dataBy.Id;
+import com.ohhoonim.demo_auditing.component.container.Page;
+import com.ohhoonim.demo_auditing.component.container.Search;
 import com.ohhoonim.demo_auditing.para.Para;
 import com.ohhoonim.demo_auditing.para.Para.ParaEnum;
 import com.ohhoonim.demo_auditing.para.Para.Shelf.Area;
-import com.ohhoonim.demo_auditing.para.ParaNoteReq;
-import com.ohhoonim.demo_auditing.para.ParaReq;
-import com.ohhoonim.demo_auditing.para.Search;
-import com.ohhoonim.demo_auditing.para.service.ParaService;
+import com.ohhoonim.demo_auditing.para.activity.service.ParaService;
 
 @WebMvcTest(ParaController.class)
 public class ParaControllerTest {

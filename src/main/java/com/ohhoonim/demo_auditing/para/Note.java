@@ -3,10 +3,10 @@ package com.ohhoonim.demo_auditing.para;
 import java.util.List;
 import java.util.Set;
 
-import com.ohhoonim.demo_auditing.component.dataBy.DataBy;
-import com.ohhoonim.demo_auditing.component.id.Id;
+import com.ohhoonim.demo_auditing.component.auditing.dataBy.Entity;
+import com.ohhoonim.demo_auditing.component.auditing.dataBy.Id;
 
-public class Note {
+public class Note implements Entity{
 
     private Id noteId;
     private String title;
@@ -14,10 +14,8 @@ public class Note {
     private Set<Tag> tags;
     private List<Para> paras;
 
-    private DataBy created;
-    private DataBy modified; 
-
-    public Note() {}
+    public Note() {
+    }
 
     public Note(Id noteId, String title, String content, Set<Tag> tags, List<Para> paras) {
         this.noteId = noteId;
@@ -25,7 +23,7 @@ public class Note {
         this.content = content;
         this.tags = tags;
         this.paras = paras;
-    } 
+    }
 
     public Note(Id noteId, String title, String content) {
         this(noteId, title, content, null, null);
@@ -83,21 +81,8 @@ public class Note {
         this.paras = paras;
     }
 
-    public DataBy getCreated() {
-        return created;
+    @Override
+    public Id getId() {
+        return noteId;
     }
-
-    public void setCreated(DataBy created) {
-        this.created = created;
-    }
-
-    public DataBy getModified() {
-        return modified;
-    }
-
-    public void setModified(DataBy modified) {
-        this.modified = modified;
-    }
-
-    
 }
