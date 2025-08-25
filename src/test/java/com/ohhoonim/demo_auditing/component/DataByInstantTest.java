@@ -1,13 +1,12 @@
 package com.ohhoonim.demo_auditing.component;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +24,9 @@ public class DataByInstantTest {
     Logger log = LoggerFactory.getLogger(this.getClass());
     
     @Test
+    @DisplayName("""
+           Instant와 LocalDateTime의 차이 비교   
+            """)
     public void instantTest() {
         Instant now = Instant.now();
         LocalDateTime localNow = LocalDateTime.now();
@@ -41,6 +43,9 @@ public class DataByInstantTest {
     MockMvcTester mockMvc;
 
     @Test
+    @DisplayName("""
+           프론트에서 어떻게 보내야 Instant로 받을 수 있을까 
+            """)
     public void controllerInstantTest() {
         mockMvc.get().uri("/test/iso")
                 .param("now", "2025-08-18T04:56:16.517031Z") // 'Z'가 있다
@@ -50,6 +55,9 @@ public class DataByInstantTest {
     }
     
     @Test
+    @DisplayName("""
+           LocalDateTime으로 받는 방법 
+            """)
     public void controllerLocalTimeTest() {
         mockMvc.get().uri("/test/local")
                 .param("now", "2025-08-18T04:56:16.517031") // 'Z'가 없다. 
@@ -66,22 +74,20 @@ public class DataByInstantTest {
     }
 
 
-    /*
-     * 일반적으로 날짜 검색시 문자열 'yyyy-MM-dd'로 서버 전송하고 필요시 변환해서 사용
-     * SI플젝에서 시분초까지 검색하는 케이스는 거의 없음
-     */
     @Test
-    public void charToLocalDate() {
-        var isoFormat = "2025-08-18T04:56:16.517031Z";
-        var localeFormat = "2025-08-18T04:56:16.517031";
-
-        var instantObject = Instant.parse(isoFormat);
-        assertThat(instantObject.toString()).isEqualTo(isoFormat);
-
-        assertThatThrownBy(() -> Instant.parse(localeFormat))
-               .hasMessageContaining("could not be parsed");
-
-        assertThat(localeFormat).isEqualTo(LocalDateTime.parse(localeFormat).toString());
+    @DisplayName("""
+           날짜 구간 검색시 생각해볼 문제 
+            """)
+    public void periodCondition() {
+        /*
+         * zone을 고려하지 않는다면 그냥 LocalDate or LocalDateTime으로 처리
+         * zone을 고려한다면 LocalDate or LocalDateTime에 대응되는 컬럼 외에 ZoneId 컬럼 추가
+         * 
+         * audit 필드 created_at, modified_at 등의 컬럼은 Instant로 처리
+         * Instant는 데이터가 저장되는 시점을 나타내는 곳에서만 사용 
+         * 
+         * 
+         */
     }
 }
 
