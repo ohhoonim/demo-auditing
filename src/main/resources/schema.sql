@@ -1,4 +1,22 @@
 
+
+create table if not exists component_changed_event (
+    id varchar(26),
+    entity_type varchar(255),
+    entity_id varchar(26),
+    creator varchar(26),
+    created timestamp,
+    json_data jsonb,
+    constraint pk_component_changed_event primary key (id)
+);
+
+comment on table component_changed_event is '변경이력';
+comment on column component_changed_event.entity_type is '엔티티 타입';
+comment on column component_changed_event.entity_id is '엔티티 id';
+comment on column component_changed_event.creator is 'creator';
+comment on column component_changed_event.created is 'created';
+comment on column component_changed_event.json_data is 'json_data';
+
 create table if not exists para_tag (
     tag_id varchar(26),
     tag varchar(255),
@@ -101,3 +119,8 @@ create table if not exists para_shelf_note (
     constraint fk_para_shelf_note_shelf_id foreign key (shelf_id) references para_shelf(shelf_id),
     constraint fk_para_shelf_note_note_id foreign key (note_id) references para_note(note_id)
 );
+
+
+
+
+

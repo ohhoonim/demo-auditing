@@ -13,6 +13,23 @@ public final class LookupEvent<T extends Entity> implements ChangedEvent<T> {
     private Created creator;
     private String jsonData;
 
+    public LookupEvent() {
+    }
+
+    public LookupEvent(Id entityId, Class<T> entityType){
+        this.entityId = entityId.toString();
+        this.entityType = Id.entityType(entityType);
+    }
+
+    public LookupEvent(Id id, String entityType, String entityId, String eventType, Created creator, String jsonData) {
+        this.id = id;
+        this.entityType = entityType;
+        this.entityId = entityId;
+        this.eventType = eventType;
+        this.creator = creator;
+        this.jsonData = jsonData;
+    }
+
     @Override
     public Id getId() {
         return id;
