@@ -25,7 +25,7 @@ public final class CreatedEvent<T extends Entity> implements ChangedEvent<T> {
     }
 
     public String getEntityId() {
-        return entityInstance.getId().toString();
+        return entityInstance.getId() == null ? null : entityInstance.getId().toString();
     }
 
     public String getEventType() {

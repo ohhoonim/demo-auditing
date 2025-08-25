@@ -16,6 +16,13 @@ public final class Created implements DataBy {
         this.created = Instant.now();
     }
 
+    
+
+    public Created(String creator, Instant created) {
+        this.creator = creator;
+        this.created = created;
+    }
+
     public String getCreator() {
         return creator;
     }
