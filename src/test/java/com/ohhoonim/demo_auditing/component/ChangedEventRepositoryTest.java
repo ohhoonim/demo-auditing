@@ -38,7 +38,7 @@ public class ChangedEventRepositoryTest {
             DockerImageName.parse("postgres:17.2-alpine"));
 
     @Autowired
-    ChangedEventRepository changedEventRepository;
+    ChangedEventRepository<Note> changedEventRepository;
 
     @Test
     public void insertChangedDataThrownTest() {
