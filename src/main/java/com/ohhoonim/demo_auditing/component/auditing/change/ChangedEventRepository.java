@@ -50,7 +50,7 @@ public class ChangedEventRepository<T extends Entity> {
 
     }
 
-    Function<String, PGobject> toJsonb = (json) -> {
+    private Function<String, PGobject> toJsonb = (json) -> {
         PGobject jsonObject = new PGobject();
         jsonObject.setType("jsonb");
         try {
@@ -61,7 +61,7 @@ public class ChangedEventRepository<T extends Entity> {
         return jsonObject;
     };
 
-    Function<ChangedEvent<T>, Map<String, Object>> toParamMap = (event) -> {
+    private Function<ChangedEvent<T>, Map<String, Object>> toParamMap = (event) -> {
         var map = new HashMap<String, Object>();
         map.put("id", event.getId().toString());
         map.put("entityType", event.getEntityType());
@@ -86,7 +86,7 @@ public class ChangedEventRepository<T extends Entity> {
 
     }
 
-    RowMapper<LookupEvent<T>> rowMapper = (rs, rownum) -> {
+    private RowMapper<LookupEvent<T>> rowMapper = (rs, rownum) -> {
 
         Instant created = rs.getTimestamp("created").toInstant();
         Created creator = new Created(rs.getString("creator"), created);
