@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Import;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
@@ -18,16 +19,18 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ohhoonim.demo_auditing.component.auditing.change.ChangedEventListener;
 import com.ohhoonim.demo_auditing.component.auditing.change.ChangedEventRepository;
 import com.ohhoonim.demo_auditing.component.auditing.change.CreatedEvent;
 import com.ohhoonim.demo_auditing.component.auditing.change.LookupEvent;
 import com.ohhoonim.demo_auditing.component.auditing.dataBy.Created;
+import com.ohhoonim.demo_auditing.component.auditing.dataBy.Entity;
 import com.ohhoonim.demo_auditing.component.auditing.dataBy.Id;
 import com.ohhoonim.demo_auditing.para.Note;
 
 @Testcontainers
 @JdbcTest
-@Import({ChangedEventRepository.class, ObjectMapper.class})
+@Import({ChangedEventRepository.class, ObjectMapper.class, ChangedEventListener.class})
 public class ChangedEventRepositoryTest {
 
     Logger log = LoggerFactory.getLogger(getClass());
@@ -74,6 +77,25 @@ public class ChangedEventRepositoryTest {
         List<LookupEvent<Note>> results = changedEventRepository.lookupEvent(lookup);
 
         log.info("{}", results) ;
+
+        assertThat(results).hasSize(1);
+
+    }
+
+    @Autowired
+    private ApplicationEventPublisher publisher;
+
+    @Test
+    public void changedEventListenerTest() throws InterruptedException {
+
+        Id noteId = new Id();
+        CreatedEvent<Note> event = new CreatedEvent<Note>(
+                new Note(noteId, "this is new note"), 
+                new Created("ohhoonim"));
+        publisher.publishEvent(event);
+
+        var lookup = new LookupEvent<>(noteId, Note.class);
+        List<LookupEvent<Note>> results = changedEventRepository.lookupEvent(lookup);
 
         assertThat(results).hasSize(1);
 

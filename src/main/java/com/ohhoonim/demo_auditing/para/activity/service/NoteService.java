@@ -6,8 +6,14 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
+import com.ohhoonim.demo_auditing.component.auditing.change.CreatedEvent;
+import com.ohhoonim.demo_auditing.component.auditing.dataBy.Created;
+import com.ohhoonim.demo_auditing.component.auditing.dataBy.Entity;
 import com.ohhoonim.demo_auditing.component.auditing.dataBy.Id;
 import com.ohhoonim.demo_auditing.component.container.Page;
 import com.ohhoonim.demo_auditing.para.Note;
@@ -24,19 +30,25 @@ import com.ohhoonim.demo_auditing.para.activity.port.TagPort;
 @Service
 public class NoteService implements NoteActivity {
 
+    private final Logger log = LoggerFactory.getLogger(getClass());
+
     private final NotePort notePort;
     private final ProjectPort projectPort;
     private final ShelfPort shelfPort;
     private final TagPort tagPort;
 
+    private final ApplicationEventPublisher eventPublisher;
+
     public NoteService(NotePort notePort,
             ProjectPort projectPort,
             ShelfPort shelfPort,
-            TagPort tagPort) {
+            TagPort tagPort,
+            ApplicationEventPublisher eventPublisher) {
         this.notePort = notePort;
         this.projectPort = projectPort;
         this.shelfPort = shelfPort;
         this.tagPort = tagPort;
+        this.eventPublisher = eventPublisher;
     }
 
     @Override
@@ -64,7 +76,12 @@ public class NoteService implements NoteActivity {
     public Optional<Note> addNote(Note newNote) {
         var newNoteId = new Id();
         notePort.addNote(newNote, newNoteId);
-        return this.getNote(newNoteId);
+
+        Optional<Note> newAddedNote = this.getNote(newNoteId);
+        CreatedEvent<Note> event = new CreatedEvent<Note>(newAddedNote.get(), new Created("ohhoonim"));
+        eventPublisher.publishEvent(event);
+
+        return newAddedNote;
     }
 
     @Override
