@@ -16,9 +16,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.context.ApplicationEventPublisher;
 
 import com.ohhoonim.demo_auditing.component.auditing.dataBy.Id;
 import com.ohhoonim.demo_auditing.component.container.Page;
+import com.ohhoonim.demo_auditing.component.container.Vo;
 import com.ohhoonim.demo_auditing.para.Para.Project;
 import com.ohhoonim.demo_auditing.para.Para.Shelf;
 import com.ohhoonim.demo_auditing.para.Para.Shelf.Area;
@@ -43,6 +45,8 @@ public class NoteTest {
     ProjectPort projectPort;
     @Mock
     ShelfPort shelfPort;
+    @Mock
+    ApplicationEventPublisher applicationEventPublisher;
 
     @Test
     @DisplayName("노트 만들고 수정하기")
@@ -165,10 +169,10 @@ public class NoteTest {
         var noteId = new Id();
 
         // when(projectPort.findProjectInNote(any()))
-            // .thenReturn(Set.of(new Project(UUID.randomUUID())));
+        // .thenReturn(Set.of(new Project(UUID.randomUUID())));
         when(projectPort.findProjectInNote(any())).thenReturn(null);
         when(shelfPort.findShelfInNote(any()))
-            .thenReturn(Set.of(new Area(new Id())));
+                .thenReturn(Set.of(new Area(new Id())));
 
         Set<Para> parasInNote = noteService.paras(noteId);
         assertThat(parasInNote.size()).isEqualTo(1);
@@ -181,23 +185,20 @@ public class NoteTest {
 
         noteService.removePara(new Id(), area);
         verify(shelfPort, times(1))
-            .removeNote(any(Id.class), any(Shelf.class));
+                .removeNote(any(Id.class), any(Shelf.class));
     }
 
     @Test
     @DisplayName("노트 검색하기 ")
     public void findNoteTest() {
         var findedNotes = List.of(
-            new Note(new Id(), "searchword is goog", null),
-            new Note(new Id(), "new note", "this content searchword")
-        ); 
+                new Note(new Id(), "searchword is goog", null),
+                new Note(new Id(), "new note", "this content searchword"));
         when(notePort.findNote(any(), any())).thenReturn(findedNotes);
 
         var results = noteService.findNote(
-            "searchword", 
-            new Page());
-        assertThat(results.size()).isEqualTo(2);
+                "searchword",
+                new Page());
+        assertThat(results.record().size()).isEqualTo(2);
     }
 }
-
-

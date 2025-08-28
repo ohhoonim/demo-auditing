@@ -185,8 +185,13 @@ public class NoteRepository implements NotePort, TagPort {
 
     @Override
     public List<Note> findNote(String searchString, Page page) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findNote'");
+        var sql = """
+               select note_id, title, content
+               from para_note 
+                """;
+        return jdbcClient.sql(sql)
+                .query(Note.class).list();
+
     }
 
 }
