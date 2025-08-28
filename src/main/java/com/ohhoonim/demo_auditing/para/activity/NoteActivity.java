@@ -6,30 +6,31 @@ import java.util.Set;
 
 import com.ohhoonim.demo_auditing.component.auditing.dataBy.Id;
 import com.ohhoonim.demo_auditing.component.container.Page;
+import com.ohhoonim.demo_auditing.component.container.Vo;
 import com.ohhoonim.demo_auditing.para.Note;
 import com.ohhoonim.demo_auditing.para.Para;
 import com.ohhoonim.demo_auditing.para.Tag;
 
 public interface NoteActivity {
-    public List<Note> findNote(String searchString, Page page);
+    public Vo<List<Note>> findNote(String searchString, Page page);
 
-        public Optional<Note> getNote(Id noteId);
+    public Optional<Note> getNote(Id noteId);
 
-        public Optional<Note> addNote(Note newNote);
+    public Optional<Note> addNote(Note newNote);
 
-        public Optional<Note> modifyNote(Note modifiedNote);
+    public Optional<Note> modifyNote(Note modifiedNote);
 
-        public void removeNote(Id noteId);
+    public void removeNote(Id noteId);
 
-        public Set<Tag> tags(Id noteId);
+    public Set<Tag> tags(Id noteId);
 
-        public Set<Tag> registTag(Id noteId, Tag tag);
+    public Set<Tag> registTag(Id noteId, Tag tag);
 
-        public Set<Tag> removeTag(Id noteId, Tag tag);
+    public Set<Tag> removeTag(Id noteId, Tag tag);
 
-        public Set<Para> paras(Id noteId);
+    public Set<Para> paras(Id noteId);
 
-        public void registPara(Id noteId, Para para);
+    public void registPara(Id noteId, Para para);
 
-        public void removePara(Id noteId, Para para);
+    public void removePara(Id noteId, Para para);
 }

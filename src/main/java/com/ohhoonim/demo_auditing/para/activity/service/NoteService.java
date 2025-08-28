@@ -13,9 +13,9 @@ import org.springframework.stereotype.Service;
 
 import com.ohhoonim.demo_auditing.component.auditing.change.CreatedEvent;
 import com.ohhoonim.demo_auditing.component.auditing.dataBy.Created;
-import com.ohhoonim.demo_auditing.component.auditing.dataBy.Entity;
 import com.ohhoonim.demo_auditing.component.auditing.dataBy.Id;
 import com.ohhoonim.demo_auditing.component.container.Page;
+import com.ohhoonim.demo_auditing.component.container.Vo;
 import com.ohhoonim.demo_auditing.para.Note;
 import com.ohhoonim.demo_auditing.para.Para;
 import com.ohhoonim.demo_auditing.para.Para.Project;
@@ -134,8 +134,9 @@ public class NoteService implements NoteActivity {
     }
 
     @Override
-    public List<Note> findNote(String searchString, Page page) {
-        return notePort.findNote(searchString, page);
+    public Vo<List<Note>> findNote(String searchString, Page page) {
+        List<Note> results = notePort.findNote(searchString, page);
+        return new Vo<>(results, page, null, null);
     }
 }
 

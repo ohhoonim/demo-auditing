@@ -2,6 +2,8 @@ package com.ohhoonim.demo_auditing.component.container.handler;
 
 import java.lang.reflect.ParameterizedType;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
@@ -69,12 +71,12 @@ public class DefaultResponseHandler implements ResponseBodyAdvice<Object> {
         }
     }
 
+    private final Logger log = LoggerFactory.getLogger(getClass());
+
     @ExceptionHandler(Exception.class)
     ResponseEntity<Response> defaultErrorHandler(HttpServletRequest request, Exception e)
             throws Exception {
-
-        e.getStackTrace();
-
+        log.error("{}", e.getMessage());
         return ResponseEntity.ok(new Fail(ResponseCode.ERROR, e.getMessage(), null));
     }
 

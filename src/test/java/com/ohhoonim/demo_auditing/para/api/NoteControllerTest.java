@@ -44,18 +44,21 @@ public class NoteControllerTest {
 
     @Test
     public void findNote() throws JsonProcessingException {
-        var noteReq = new NoteRequest("", new Page());
-        var reqData = objectMapper.writeValueAsString(noteReq);
-        mockMvcTester.post()
-                .uri("/note/list")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(reqData) // post method는 여기에 담아서 넘긴다
-                .assertThat()
-                .apply(print()) 
-                .hasStatusOk()
-                .bodyJson()
-                .extractingPath("$.code") // JsonPath로 동작 시작
-                .isEqualTo("SUCCESS");
+
+        // SearchContainerTest.java 로 이동
+
+        // var noteReq = new NoteRequest("", new Page());
+        // var reqData = objectMapper.writeValueAsString(noteReq);
+        // mockMvcTester.post()
+        //         .uri("/note/list")
+        //         .contentType(MediaType.APPLICATION_JSON)
+        //         .content(reqData) // post method는 여기에 담아서 넘긴다
+        //         .assertThat()
+        //         .apply(print()) 
+        //         .hasStatusOk()
+        //         .bodyJson()
+        //         .extractingPath("$.code") // JsonPath로 동작 시작
+        //         .isEqualTo("SUCCESS");
     }
 
     @Test
@@ -236,8 +239,7 @@ public class NoteControllerTest {
     @Test
     public void findTagsLimit20PerPageTest() throws JsonProcessingException {
         var noteReq = new NoteRequest(
-                "",
-                new Page());
+                "");
         mockMvcTester.post()
                 .uri("/note/searchTags")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -247,7 +249,8 @@ public class NoteControllerTest {
                 .hasStatusOk()
                 .bodyJson()
                 .extractingPath("$.code")
-                .isEqualTo("SUCCESS");
+                .isEqualTo("ERROR");
+        // SearchContainerTest 참고
     }
 
 }

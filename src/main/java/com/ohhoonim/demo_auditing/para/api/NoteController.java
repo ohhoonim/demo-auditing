@@ -12,35 +12,36 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ohhoonim.demo_auditing.component.auditing.dataBy.Id;
 import com.ohhoonim.demo_auditing.component.container.Page;
 import com.ohhoonim.demo_auditing.component.container.Response;
-import com.ohhoonim.demo_auditing.component.container.ResponseCode;
 import com.ohhoonim.demo_auditing.component.container.Response.Success;
+import com.ohhoonim.demo_auditing.component.container.ResponseCode;
+import com.ohhoonim.demo_auditing.component.container.Search;
+import com.ohhoonim.demo_auditing.component.container.Vo;
 import com.ohhoonim.demo_auditing.para.Note;
 import com.ohhoonim.demo_auditing.para.Para;
 import com.ohhoonim.demo_auditing.para.Tag;
-import com.ohhoonim.demo_auditing.para.activity.service.NoteService;
-import com.ohhoonim.demo_auditing.para.activity.service.TagService;
+import com.ohhoonim.demo_auditing.para.activity.NoteActivity;
+import com.ohhoonim.demo_auditing.para.activity.TagActivity;
 
 @RestController
 public class NoteController {
 
-    private final NoteService noteService;
-    private final TagService tagService;
+    private final NoteActivity noteService;
+    private final TagActivity tagService;
 
     public NoteController(
-            NoteService noteService, TagService tagService) {
+            NoteActivity noteService, TagActivity tagService) {
         this.noteService = noteService;
         this.tagService = tagService;
     }
 
     @PostMapping("/note/list")
-    public List<Note> findNote(@RequestBody NoteRequest noteReq) {
-        return noteService.findNote(noteReq.searchString(),
-                noteReq.page());
+    public Vo<List<Note>> findNote(@RequestBody Search<NoteRequest> noteReq) {
+        return noteService.findNote(noteReq.getReq().searchString(),
+                noteReq.getPage());
     }
 
     public record NoteRequest(
-            String searchString,
-            Page page) {
+            String searchString) {
     }
 
     @GetMapping("/note/{noteId}")
@@ -108,10 +109,10 @@ public class NoteController {
 
     @PostMapping("/note/searchTags")
     public Set<Tag> findTagsLimit20PerPage(
-            @RequestBody NoteRequest noteReq) {
+            @RequestBody Search<NoteRequest> noteReq) {
         return tagService.findTagsLimit20PerPage(
-                noteReq.searchString(),
-                noteReq.page());
+                noteReq.getReq().searchString(),
+                noteReq.getPage());
     }
 
 }
