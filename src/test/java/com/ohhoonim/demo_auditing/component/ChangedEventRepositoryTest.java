@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,6 +45,7 @@ public class ChangedEventRepositoryTest {
     ChangedEventRepository<Note> changedEventRepository;
 
     @Test
+    @DisplayName("entity_id 필수 체크")
     public void insertChangedDataThrownTest() {
         var note = new Note(null, "Spring framework");
         var created = new Created("ohhoonim");
@@ -55,6 +57,7 @@ public class ChangedEventRepositoryTest {
     }
 
     @Test
+    @DisplayName("이력 저장소 저장 테스트, json으로 잘 변화되는지 체크")
     public void insertChangedDataNormalTest() {
         var note = new Note(new Id(), "Spring framework");
         var created = new Created("ohhoonim");
@@ -65,6 +68,7 @@ public class ChangedEventRepositoryTest {
     }
 
     @Test
+    @DisplayName("이력 테이블 조회")
     public void historyTest() {
         var noteId = new Id();
 
@@ -86,6 +90,7 @@ public class ChangedEventRepositoryTest {
     private ApplicationEventPublisher publisher;
 
     @Test
+    @DisplayName("이벤트 발행 테스트. ApplicationEventPublisher")
     public void changedEventListenerTest() throws InterruptedException {
 
         Id noteId = new Id();
